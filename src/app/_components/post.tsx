@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-import { api } from "~/trpc/react";
+// import { api } from "~/trpc/react";
 import Landing from "./home";
 
 export function LatestPost() {
   // const [latestPost] = api.post.getLatest.useSuspenseQuery();
 
-  const utils = api.useUtils();
+  // const utils = api.useUtils();
   const [hidden, setHidden] = useState(true);
   // const createPost = api.post.create.useMutation({
   //   onSuccess: async () => {
