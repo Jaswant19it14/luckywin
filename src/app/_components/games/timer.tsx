@@ -19,6 +19,7 @@ const Timer = ({setActive}:TimerProps) => {
                 setSeconds("Get Ready")
             }else{
                 setSeconds((60-serverDate.getSeconds()).toString());
+                setActive(true)
             }
         }, 1000);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Timer from "./timer";
 
 const Color = () => {
@@ -23,15 +23,19 @@ const Color = () => {
   }
 
   // console.log(amount,"amount")
-  const submitAmount = () => {
+  const submitAmount = async () => {
     console.log("Submitting amount:", amount, "on "+`${choice==0?'red':choice==1?'green':"none"}`);
-    fetch('/api/games/submitrg', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice: choice, amount:amount }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    try {
+      const res = await fetch('/api/games/submitrg', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ choice: choice, amount: amount }),
+      });
+      const data= await res.json() as JSON;
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
     
     
     reset()
@@ -88,7 +92,7 @@ const Color = () => {
         </div>
         <div className="w-full">
           <button
-          disabled={!active}
+            disabled={!active || choice==3 || amount==0 }
             className={`w-full rounded-md ${choice==0?`bg-red-600`:choice==1?`bg-green-600`:`bg-blue-600`} px-4 py-2 text-center font-semibold text-white shadow-md active:bg-blue-500`}
             onClick={submitAmount}
           >
