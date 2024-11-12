@@ -5,8 +5,8 @@ import Rps from "./games/rps";
 import Number from "./games/number";
 
 const Landing = () => {
-  const [selectedComponent, setSelectedComponent] = useState<JSX.Element>();
-  const [ component, setComponent] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState<JSX.Element>(<Color/>);
+  const [ component, setComponent] = useState(true);
   const Games = [
     {
       name: "Tic-tac-toe",

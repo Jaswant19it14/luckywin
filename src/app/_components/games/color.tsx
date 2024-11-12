@@ -4,6 +4,7 @@ import Timer from "./timer";
 const Color = () => {
   const [amount, setAmount] = useState(0);
   const [choice, setChoice] = useState(3);
+  const [active, setActive] = useState(true);
   const amt = [
     { count: 10 },
     { count: 20 },
@@ -42,7 +43,7 @@ const Color = () => {
         <div className="flex justify-between gap-2 lg:justify-start">
           <div className="w-[60vw] flex-col items-center">
             <div className="rounded-md px-2 py-4 text-center">
-              <Timer />
+              <Timer setActive={setActive}/>
             </div>
             <div className="flex rounded-full border-4 border-white border-l-green-600 border-r-red-600 px-2 py-4 text-center">
               <div className="w-[50%]">
@@ -87,6 +88,7 @@ const Color = () => {
         </div>
         <div className="w-full">
           <button
+          disabled={!active}
             className={`w-full rounded-md ${choice==0?`bg-red-600`:choice==1?`bg-green-600`:`bg-blue-600`} px-4 py-2 text-center font-semibold text-white shadow-md active:bg-blue-500`}
             onClick={submitAmount}
           >

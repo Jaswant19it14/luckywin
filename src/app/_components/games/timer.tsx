@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-const Timer = () => {
+type TimerProps = {
+    setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+
+const Timer = ({setActive}:TimerProps) => {
     const [seconds, setSeconds] = useState(new Date().getSeconds().toString());
 
     useEffect(() => {
@@ -10,6 +14,7 @@ const Timer = () => {
             const seconds = 60-serverDate.getSeconds()
             if(seconds>=50){
                 setSeconds("Time Out")
+                setActive(false)
             }else if(seconds>45&&seconds<50){
                 setSeconds("Get Ready")
             }else{
