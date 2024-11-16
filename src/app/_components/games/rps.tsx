@@ -1,6 +1,9 @@
 import React from 'react'
-
-const Rps = () => {
+interface props{
+  amount: React.Dispatch<React.SetStateAction<number>>
+  factor:  React.Dispatch<React.SetStateAction<number>>
+}
+const Rps = ({amount,factor}:props) => {
   return (
     <div>sps</div>
   )

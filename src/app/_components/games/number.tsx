@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Number = () => {
+interface props{
+  amount: React.Dispatch<React.SetStateAction<number>>
+  factor:  React.Dispatch<React.SetStateAction<number>>
+}
+
+const Number = ({amount,factor}:props) => {
   return (
     <div>Nnumber</div>
   )

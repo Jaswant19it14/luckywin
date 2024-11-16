@@ -1,9 +1,12 @@
-
+"use-client";
 import { LatestPost } from "~/app/_components/post";
+import { auth } from "~/server/auth";
+import SignInButton from "./_components/SignInButton";
 
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
-  // const session = await auth();
+  
+  const session = await auth();
 
   // if (session?.user) {
   //   void api.post.getLatest.prefetch();
@@ -11,8 +14,16 @@ export default async function Home() {
 
   return(
     <>
+    {session?(
+      <>
+        <LatestPost session={session}/>
+      </>
+    ):(
+      <>
+        <SignInButton/>
+      </>
+    )}
 
-    <LatestPost/>
     
     
     </>

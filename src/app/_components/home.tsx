@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tictactoe from "./games/tic-tac-toe";
 import Color from "./games/color";
 import Rps from "./games/rps";
 import Number from "./games/number";
+import { Session } from 'next-auth'
 
-const Landing = () => {
-  const [selectedComponent, setSelectedComponent] = useState<JSX.Element>(<Color/>);
-  const [ component, setComponent] = useState(true);
+interface props{
+    session: Session|null,
+    coins:number
+  }
+
+const Landing = ({session,coins}:props) => {
+  console.log("coins1",coins)
+  const [ component, setComponent] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [factor, setFactor] = useState(0)
+  const [selectedComponent, setSelectedComponent] = useState<JSX.Element|null>();
+
+
+
   const Games = [
     {
       name: "Tic-tac-toe",
-      component: <Tictactoe/>,
+      component: <Tictactoe amount={setAmount} factor={setFactor}/>,
       color: "",
       image: "assets/tic-tac-toe-icon.svg",
     },
     {
       name: "Rock-Paper-Scissor",
-      component: <Rps/>,
+      component: <Rps amount={setAmount} factor={setFactor}/>,
       color: "",
       image: "assets/rock-paper-scissors.png",
     },
@@ -28,11 +40,16 @@ const Landing = () => {
     // },
     {
       name: "Number Guess",
-      component: <Number/>,
+      component: <Number amount={setAmount} factor={setFactor}/>,
       color: "",
       image: "assets/123.png",
     },
   ];
+
+  useEffect(()=>{
+    setComponent(true)
+    setSelectedComponent(<Color amount={setAmount} factor={setFactor} session={session} coins={coins}/>)
+  },[coins])
 
   return (
     <>
@@ -48,7 +65,7 @@ const Landing = () => {
         <div
           className="h-[40vw] w-[40vw] items-center rounded-lg p-2 text-center shadow-lg lg:h-[25vw] lg:w-[25vw] active:p-6"
           onClick={() => {
-            setSelectedComponent(<Color/>)
+            setSelectedComponent(<Color amount={setAmount} factor={setFactor} session={session} coins={coins}/>)
             setComponent(true)
           }}
         >

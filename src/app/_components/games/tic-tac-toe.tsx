@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Tictactoe = () => {
+interface props{
+  amount: React.Dispatch<React.SetStateAction<number>>
+  factor:  React.Dispatch<React.SetStateAction<number>>
+}
+const Tictactoe = ({amount,factor}:props) => {
   return (
     <div>tic-tac-toe</div>
   )
